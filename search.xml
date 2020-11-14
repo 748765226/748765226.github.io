@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>Hello World</title>
+    <url>/2020/05/20/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>linux</title>
+    <url>/2015/08/15/linux/</url>
+    <content><![CDATA[<h3 id="Linux-等常见问题"><a href="#Linux-等常见问题" class="headerlink" title="Linux 等常见问题"></a>Linux 等常见问题</h3><a id="more"></a>
+
+<p><strong>1.添加个人账户</strong></p>
+<ul>
+<li>cd path</li>
+<li>adduser <strong>ozh</strong><br>设置密码，其它选项按默认即可，账户即添加成功</li>
+<li>su ozh<br>输入密码后即可切换到新创建的账户</li>
+</ul>
+<p><strong>2.给用户添加sudo权限</strong></p>
+<p>​    编辑 /etc/sudoers<br>​    sudo visudo，进入编辑模式，找到这一 行：“root ALL=(ALL) ALL”在起下面添加”用户名 ALL=(ALL) ALL”<br>​    sudo vim /etc/sudoers 即可看到成功添加 ozh ALL=(ALL) ALL</p>
+<p>   或者sudo usermod -a -G sudo hduser</p>
+<ul>
+<li>sudo usermod -a -G sudo tt（新用户）</li>
+<li>修改后的结果可以查看/etc/group，可以看到sudo这一栏中包含tt</li>
+</ul>
+<p><strong>3.修改密码</strong></p>
+<p>在超级用户权限下，输入sudo passwd ozh，然后两次输入密码，即可修改密码。</p>
+<p><strong>压缩</strong>tar -czvf test.tar.gz a.c   //压缩 a.c文件为test.tar.gz</p>
+<p><strong>解压</strong>tar -xzvf test.tar.gz </p>
+<p><strong>$ sudo chmod -R 777 某一目录</strong></p>
+<p>-R 是指级联应用到目录里的所有子目录和文件<br>777 是所有用户都拥有最高权限</p>
+<p>Linux查看当前操作系统版本信息 cat /proc/version </p>
+<p>Linux查看版本当前操作系统内核信息 uname -a</p>
+<p>linux查看版本当前操作系统发行信息 cat /etc/issue 或 cat /etc/centos-release</p>
+<p>Linux查看cpu相关信息，包括型号、主频、内核信息等 cat /etc/cpuinfo</p>
+<p>lspci   安装pciutils </p>
+<h3 id="Screen"><a href="#Screen" class="headerlink" title="Screen"></a>Screen</h3><p>screen -S xxx //创建一个screen，按住Ctrl，依次按a+d暂离会话，依次按a+c创建子会话，a+2,切换会话</p>
+<p>screen -ls //查看所有创建会话</p>
+<p>screen -r xxx //恢复会话</p>
+<p>有时在恢复screen时会出现There is no screen to be resumed matching ****，screen -d xxx</p>
+<p>exit退出会话</p>
+<p><strong>etc/.bashrc和etc/profile 针对所有用户，home/。。针对特定用户</strong></p>
+<p>sudo apt-get install python3-venv</p>
+<p>python3 -m venv venv//创建</p>
+<p>source venv/bin/activate//进入环境</p>
+<p>deactivate//退出</p>
+<p>mv  A/B C/D //移动A中的B文件到C目录下的D文件</p>
+<h3 id="容器介绍"><a href="#容器介绍" class="headerlink" title="容器介绍"></a>容器介绍</h3><p><a href="https://www.cnblogs.com/qcloud1001/p/9273549.html">https://www.cnblogs.com/qcloud1001/p/9273549.html</a></p>
+<p><a href="https://www.cnblogs.com/bethal/p/5942369.html">https://www.cnblogs.com/bethal/p/5942369.html</a></p>
+<p>apt search xxx //想要安装的文件xxx的网络资源全程</p>
+<p>apt remove XXX//卸载xxx</p>
+<p>dpkg -l | grep xxx//查询已安装包 sudo apt remove –purge dock.io//针对性删除</p>
+<p>sudo ufw status <strong>查看防火墙状态</strong></p>
+<p>sudo ufw enable/disable</p>
+<p>/etc/hostname  主机名</p>
+<p>/etc/hosts</p>
+<p>df -h //查看磁盘使用情况</p>
+<p>du -sh *//查看文件占用空间大小</p>
+<h3 id="GIT"><a href="#GIT" class="headerlink" title="GIT"></a>GIT</h3><p>git push origin（远程库名称）xx:xx(本地分支：远程分支) </p>
+<p>git pull origin（远程库名称）xx:xx(远程分支：本地分支)</p>
+<p>git merge origin/master(将名为origin的远程库的master分支合并到当前分支)</p>
+<p>git clone -b xxx（分支名） xxxx（远程库地址）</p>
+<p>git stash 暂时丢掉</p>
+<p>git stash pop</p>
+<h3 id="conda"><a href="#conda" class="headerlink" title="conda"></a>conda</h3><p>conda config –set auto_activate_base false 退出默认base</p>
+<p>conda create -n xxx python==3.x 创建环境</p>
+<p>conda env remove -n env-name 删除指定环境</p>
+<p>conda env list 列出环境列表</p>
+<p>conda install xxx 安装xx包</p>
+<p>conda remove xxx 删除指定包</p>
+<p>conda update package-name 更新指定包</p>
+<p>conda list 列出所有包</p>
+<p>conda search xxx 搜索指定包</p>
+<p>conda activate  xxx 进入某个环境</p>
+<p>conda deactivate 退出</p>
+<p><strong>添加conda源</strong></p>
+<p>conda config –add channels <a href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/msys2/">https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/msys2/</a></p>
+<p>conda config –add channels <a href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/">https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/</a></p>
+<p>conda config –add channels <a href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/">https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/</a></p>
+<p>conda config –set show_channel_urls yes</p>
+<p>pip3 install pyqt5 -i <a href="https://pypi.tuna.tsinghua.edu.cn/simple">https://pypi.tuna.tsinghua.edu.cn/simple</a>  指定清华源</p>
+<p>pip3 –default-timeout=1000 install -U matplotlib 让延迟检测时间变长</p>
+<p>pip3 –default-timeout=1000  install -U pyqt5 -i   <a href="https://pypi.tuna.tsinghua.edu.cn/simple">https://pypi.tuna.tsinghua.edu.cn/simple</a> <a href="http://mirrors.aliyun.com/pypi/simple/">http://mirrors.aliyun.com/pypi/simple/</a></p>
+<p>解决pip下载速度慢 <a href="https://blog.csdn.net/fatfatmomo/article/details/81184119">https://blog.csdn.net/fatfatmomo/article/details/81184119</a></p>
+<p>Linux下，修改 ~/.pip/pip.conf (没有就创建一个文件夹及文件。文件夹要加“.”，表示是隐藏文件夹)</p>
+<p>[global]<br>index-url = <a href="https://pypi.tuna.tsinghua.edu.cn/simple">https://pypi.tuna.tsinghua.edu.cn/simple</a></p>
+<p>[install]<br>trusted-host=mirrors.aliyun.com</p>
+<p>apt-get install  psmisc #安装fuser</p>
+<h3 id="Tmux"><a href="#Tmux" class="headerlink" title="Tmux"></a>Tmux</h3><p>会话 session 窗口 window 窗格 </p>
+<p><a href="http://www.ruanyifeng.com/blog/2019/10/tmux.html">http://www.ruanyifeng.com/blog/2019/10/tmux.html</a></p>
+<p>tmux new -s new-session #创建新会话</p>
+<p>tmux detach或者按下ctrl+b d 分离会话</p>
+<p>tmux attach -t name-session#恢复会话</p>
+<p>tmux switch -t name-session #切换会话</p>
+<p>tmux ls #显示所有会话</p>
+<p>tmux kill-session -t  name-session #杀死会话</p>
+<p>tmux rename -t name-session new-session-name # 重命名</p>
+<p><strong>高级tmux</strong></p>
+<p>tmux split-window # 划分上下窗格</p>
+<p>tmux split -h # 划分左右窗格 </p>
+<p>tmux select-pane -U -D -L -R #上下左右切换鼠标光标</p>
+<p>tmux swap-pane -U -D -L -R # 上下左右切换窗格位置</p>
+<p><strong>tmux 快捷键</strong></p>
+<ul>
+<li><code>Ctrl+b d</code>：分离当前会话。</li>
+<li><code>Ctrl+b s</code>：列出所有会话。</li>
+<li><code>Ctrl+b %</code>：划分左右两个窗格。</li>
+<li><code>Ctrl+b &quot;</code>：划分上下两个窗格。</li>
+<li><code>Ctrl+b &lt;arrow key&gt;</code>：光标切换到其他窗格。<code>&lt;arrow key&gt;</code>是指向要切换到的窗格的方向键，比如切换到下方窗格，就按方向键<code>↓</code>。</li>
+<li><code>Ctrl+b x</code>：关闭当前窗格。</li>
+<li><code>Ctrl+b z</code>：当前窗格全屏显示，再使用一次会变回原来大小。</li>
+<li><code>Ctrl+b q</code>：显示窗格编号。</li>
+<li><code>Ctrl+b !</code>：将当前窗格拆分为一个独立窗口。</li>
+<li><code>Ctrl+b c</code>：创建一个新窗口，状态栏会显示多个窗口的信息。</li>
+<li><code>Ctrl+b &lt;number&gt;</code>：切换到指定编号的窗口，其中的<code>&lt;number&gt;</code>是状态栏上的窗口编号。</li>
+<li><code>Ctrl+b w</code>：从列表中选择窗口。</li>
+<li><code>Ctrl+b ,</code>：窗口重命名。</li>
+<li><code>Ctrl+b $</code>：重命名当前会话。</li>
+</ul>
+<p><strong>tmux流程</strong></p>
+<p>tmux 新建一个会话， ctrl+b $ 重命名当前会话， ctrl+b % 左右划分 窗格 ，ctrl+b “ 上下划分窗格， ctrl+b c 新建窗口，ctrl+b ， 重命名窗口， ctrl+b d 离开当前会话，tmux ls 显示所有会话，tmux attach -t 会话名，ctrl+b x 关闭当前窗格 ctrl+b w列表选择会话、窗口、窗格。</p>
+<p><strong>curl待学…</strong></p>
+<p><strong>安装detectron包</strong></p>
+<p>pip3 install detectron2==0.1.3-f  <a href="https://dl.fbaipublicfiles.com/detectron2/wheels/cu101/torch1.5/index.html">https://dl.fbaipublicfiles.com/detectron2/wheels/cu101/torch1.5/index.html</a> </p>
+<h3 id="Ubuntu16-04桌面突然卡住"><a href="#Ubuntu16-04桌面突然卡住" class="headerlink" title="Ubuntu16.04桌面突然卡住"></a>Ubuntu16.04桌面突然卡住</h3><p>(1)Ubuntu有6个tty终端，按住Ctrl+Alt+F1可以进入tty1终端，（同理Ctrl+Alt+F2，F3等可以进入其他的tty1终端，这里我们只需要进入一个tty终端就能解决问题）。</p>
+<p>(2)进入tty终端后先输入你的用户名和密码登录。</p>
+<p>(3)执行命令注销桌面重新登陆：</p>
+<p>sudo pkill Xorg</p>
+<p><a href="https://blog.csdn.net/hautxuhaihu/article/details/78924926">https://blog.csdn.net/hautxuhaihu/article/details/78924926</a> </p>
+<h3 id="Vim高级用法"><a href="#Vim高级用法" class="headerlink" title="Vim高级用法"></a>Vim高级用法</h3><p>1)一些常用的Vim配置，在~/.vimrc中</p>
+<p>syntax on    支持语法高亮</p>
+<p>set nu      显示行号<br>set nonu    不显示行号</p>
+<p>set ai      设置自动缩进</p>
+<p>set shiftwidth=4  设置自动缩进 4 个空格, 当然要设自动缩进先.</p>
+<p>set sts=4      即设置 softtabstop 为 4. 输入 tab 后就跳了 4 格.</p>
+<p>set tabstop=4    实际的 tab 即为 4 个空格, 而不是缺省的 8 个.</p>
+<p>set expandtab    在输入 tab 后, vim 用恰当的空格来填充这个 tab.</p>
+<p>:set hls 打开搜索高亮</p>
+<p>:set nohls 取消搜索高亮 </p>
+<p>:set list ： 显示特殊字符</p>
+<p>:set nolist </p>
+<p>2）查找 </p>
+<p>/xxx(?xxx) 表示在整篇文档中搜索匹配xxx的字符串, / 表示向下查找, ? 表示向上查找.查找到以后, 再输入 n 查找下一个匹配处, 输入 N 反方向查找.</p>
+<ol start="3">
+<li> 移动</li>
+</ol>
+<p>w(e) 移动光标到下一个单词. b 移动光标到上一个单词.<br>0 移动光标到本行最开头. ^ 移动光标到本行最开头的字符处. $ 移动光标到本行结尾处.<br>向前向后翻页 ctrl+f 和 ctrl+b.<br>% 跳转到相配对的括号.<br>  G(shift+g)   - go to the last line in the vim editor (文件的末尾)  1G - goto line number 1(文件的开始) 20G - goto line number 20</p>
+<p>查看GPU型号</p>
+<p>lspci | grep -i nvidia</p>
+<p>查看NVIDIA驱动版本</p>
+<p>sudo dpkg –list | grep nvidia-*</p>
+<p>或者</p>
+<p>cat /proc/driver/nvidia/version</p>
+<h3 id="ubuntu-sudo-update与upgrade的作用及区别"><a href="#ubuntu-sudo-update与upgrade的作用及区别" class="headerlink" title="ubuntu sudo update与upgrade的作用及区别"></a>ubuntu sudo update与upgrade的作用及区别</h3><p> <a href="https://blog.csdn.net/beckeyloveyou/article/details/51352426">https://blog.csdn.net/beckeyloveyou/article/details/51352426</a> </p>
+<h3 id="Ubuntu18-04下更改apt源为阿里云源"><a href="#Ubuntu18-04下更改apt源为阿里云源" class="headerlink" title="Ubuntu18.04下更改apt源为阿里云源"></a>Ubuntu18.04下更改apt源为阿里云源</h3><p> <a href="https://blog.csdn.net/zhangjiahao14/article/details/80554616">https://blog.csdn.net/zhangjiahao14/article/details/80554616</a> </p>
+<h3 id="解决ubuntu分辨率问题"><a href="#解决ubuntu分辨率问题" class="headerlink" title="解决ubuntu分辨率问题"></a>解决ubuntu分辨率问题</h3><p><a href="https://blog.csdn.net/simmonloyld/article/details/87393775">https://blog.csdn.net/simmonloyld/article/details/87393775</a></p>
+<h3 id="显卡，显卡驱动-nvcc-cuda-driver-cudatoolkit-cudnn"><a href="#显卡，显卡驱动-nvcc-cuda-driver-cudatoolkit-cudnn" class="headerlink" title="显卡，显卡驱动,nvcc, cuda driver,cudatoolkit,cudnn"></a>显卡，显卡驱动,nvcc, cuda driver,cudatoolkit,cudnn</h3><p> <a href="https://zhuanlan.zhihu.com/p/91334380">https://zhuanlan.zhihu.com/p/91334380</a> </p>
+<p><strong>CUDA Toolkit</strong> 包括 <strong>1.Compiler</strong>: CUDA-C和CUDA-C++编译器<code>NVCC</code>  <strong>2.Tools</strong>: 提供一些像<code>profiler</code>,<code>debuggers</code>等工具  <strong>3.Libraries</strong>: 下面列出的部分科学库和实用程序库  <strong>4.CUDA Samples</strong>: 演示如何使用各种CUDA和library API的代码示例  <strong>5.CUDA Driver</strong>: 运行CUDA应用程序需要系统至少有一个<strong>具有CUDA功能的GPU</strong>和<strong>与CUDA工具包兼容的驱动程序</strong>  </p>
+<p><img src="https://pic1.zhimg.com/80/v2-fc8c720a858b6c2583b09f0228c4b3e0_720w.jpg" alt="img"></p>
+<p>而显卡GPU driver功能上等价于cuda toolkit里面的cuda driver。但cuda有两个API Runtime API和Driver API ，这两个API都有对应的CUDA版本 ， </p>
+<p>用于支持<strong>driver API</strong>的必要文件(如<code>libcuda.so</code>)是由<strong>GPU driver installer</strong>安装的。<code>nvidia-smi</code>就属于这一类API。  </p>
+<p>用于支持<strong>runtime API</strong>的必要文件(如<code>libcudart.so</code>以及<code>nvcc</code>)是由<strong>CUDA Toolkit installer</strong>安装的。（<strong>CUDA Toolkit Installer有时可能会集成了GPU driver Installer</strong>）。<code>nvcc</code>是与CUDA Toolkit一起安装的CUDA compiler-driver tool，它只知道它自身构建时的CUDA runtime版本。它不知道安装了什么版本的GPU driver，甚至不知道是否安装了GPU driver。  </p>
+<p>如果driver API和runtime API的CUDA版本不一致可能是因为使用的是单独的（显卡）GPU driver installer，而不是CUDA Toolkit installer里的GPU driver installer。 </p>
+<p> <img src="https://pic3.zhimg.com/80/v2-a1f1d9f699697a8e05979abf749fbeae_720w.jpg" alt="img"> </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">检测pytorch在当前cuda版本中是可用</span><br><span class="line">import torch </span><br><span class="line">print(torch.cuda.is_available())</span><br><span class="line"></span><br><span class="line">torch.cuda.get_device_name(0)</span><br></pre></td></tr></table></figure>
+
+<h3 id="docker"><a href="#docker" class="headerlink" title="docker"></a>docker</h3><p>docker image ls  # 列出本机的所有 image 文件 </p>
+<p>docker image rm [image_name] # 删除 image文件 </p>
+<p>docker container run [image_name]  会从一个镜像文件中生成一个容器实例,并且运行它</p>
+<p>docker container run命令具有自动抓取 image 文件的功能。如果发现本地没有指定的 image 文件，就会从仓库自动抓取。docker image pull命令并不是必需的步骤。 </p>
+<p> docker container ls  # 查看当前运行容器 </p>
+<p> docker container ls –all   # 列出本机所有容器，包括终止运行的容器 </p>
+<p> 终止运行的容器文件依然会占用硬盘空间,可以使用docker container rm [container_id]命令删除 </p>
+<p>以下命令使用 ubuntu 镜像<strong>启动</strong>一个容器，参数为以命令行模式进入该容器：</p>
+<p><strong>docker run -it ubuntu /bin/bash</strong></p>
+<p>-it : 容器的shell会映射到当前本地的shell,你在本机窗口输入的命令会传入到容器中 </p>
+<p><strong>查看</strong>所有的容器（<strong>包括已停止</strong>的）命令如下：</p>
+<p><strong>docker ps -a</strong></p>
+<p>使用 <strong>docker start</strong> <strong>重启一个已停止</strong>的容器：</p>
+<p><strong>docker start container_id</strong></p>
+<p>希望 docker 的服务是在<strong>后台运行</strong>的，我们可以过 <strong>-d</strong> 指定容器的运行模式。</p>
+<p><strong>docker run -itd –name ubuntu-test ubuntu /bin/bash</strong></p>
+<p> 加了 <strong>-d</strong> 参数默认不会进入容器，想要进入容器需要使用指令 <strong>docker exec</strong> </p>
+<p> <strong>停止容器</strong> </p>
+<p><strong>docker stop &lt;容器 ID&gt;</strong></p>
+<p>在使用 <strong>-d</strong> 参数时，容器启动后会进入后台。此时想要进入容器，可以通过以下指令进入：</p>
+<ul>
+<li><strong>docker attach</strong>(粘贴到当前终端)</li>
+<li><strong>docker exec</strong>：推荐大家使用 docker exec 命令，因为此退出容器终端，不会导致容器的停止。</li>
+</ul>
+<p>如果要<strong>导出本地某个容器</strong>，可以使用 <strong>docker export</strong> 命令。</p>
+<p> <strong>docker export 1e560fca3906 &gt; ubuntu.tar</strong>  这样将导出容器快照到本地文件 </p>
+<p>可以使用 <strong>docker import</strong> 从容器快照文件中再导入为镜像，以下实例将快照文件 ubuntu.tar 导入到镜像 test/ubuntu:v1:</p>
+<p> cat docker/ubuntu.tar | <strong>docker import - test/ubuntu:v1</strong></p>
+<p>下面的命令可以<strong>清理掉所有处于终止状态的容器</strong>。</p>
+<p><strong>docker container prune</strong></p>
+]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+        <tag>ubuntu</tag>
+        <tag>docker</tag>
+      </tags>
+  </entry>
+</search>
