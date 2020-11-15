@@ -1,22 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Hello World</title>
-    <url>/2020/05/20/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+    <title>Hadoop</title>
+    <url>/2020/11/15/Hadoop%E6%95%99%E7%A8%8B/</url>
+    <content><![CDATA[<h1 id="Hadoop教程"><a href="#Hadoop教程" class="headerlink" title="Hadoop教程"></a>Hadoop教程</h1><a id="more"></a>
 
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>教程不易，请各位大佬麻烦点点Github关注，所需文件和工具可与本人进行联系（评论区或者右下角通信）。此外，建议所有命令建议手敲，本教程根据本人的理解将安装所遇到的坑与心得进行步骤详解，有不对的地方欢迎各位大佬指出！</p>
+<h3 id="Hadoop-Java对应版本号"><a href="#Hadoop-Java对应版本号" class="headerlink" title="Hadoop Java对应版本号"></a>Hadoop Java对应版本号</h3><ul>
+<li><p>Apache Hadoop 3.x 版本 现在只支持 Java 8</p>
+</li>
+<li><p>Apache Hadoop 从2.7.x 到 2.x 版本支持Java 7 and 8</p>
+</li>
+</ul>
+<p><strong>本次教程使用的是Java 8和hadoop 2.9.2，总共分为三步，第一步Java安装，hadoop单节点安装，ssh免密通信以及hadoop多节点安装</strong></p>
+<h3 id="第一步：Java安装教程"><a href="#第一步：Java安装教程" class="headerlink" title="第一步：Java安装教程"></a>第一步：Java安装教程</h3><p><strong>参考：</strong><a href="https://www.jianshu.com/p/f000e05f3512">https://www.jianshu.com/p/f000e05f3512</a></p>
+<p><img data-src="/Users/jwang/Desktop/blog/source/images/hadoop/JavaSE8.png" alt="image-20201115193755113"></p>
+<p><strong>将下载好的Java 8压缩包传进服务器，推荐使用sftp命令或者软件Xftp</strong></p>
+<p><img data-src="/Users/jwang/Desktop/blog/source/images/hadoop/Xftp.png" alt="image-20201115200442674"></p>
+<p><strong>进行解压</strong></p>
+<p><img data-src="/Users/jwang/Desktop/blog/source/images/hadoop/%E8%A7%A3%E5%8E%8Bjava8%E5%8E%8B%E7%BC%A9%E5%8C%85.png" alt="image-20201115200627333"></p>
+<p><strong>设置环境变量</strong></p>
+<p>1.在终端输入 <code>cd</code> 进入~目录，修改环境变量，输入<code>vi .bashrc</code> </p>
+<p><img data-src="/Users/jwang/Desktop/blog/source/images/hadoop/%E4%BF%AE%E6%94%B9java%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F.png" alt="image-20201115203243201"></p>
+<p>2.点击键盘 <code>i</code> 或者<code>insert</code> 在末行添加下列</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">export JAVA_HOME&#x3D;&#x2F;usr&#x2F;local&#x2F;java&#x2F;jdk1.8.0_191</span><br><span class="line">export CLASSPATH&#x3D;.:$JAVA_HOME&#x2F;jre&#x2F;lib&#x2F;rt.jar:$JAVA_HOME&#x2F;lib&#x2F;dt.jar:$JAVA_HOME&#x2F;lib&#x2F;tools.jar</span><br><span class="line">export PATH&#x3D;$PATH:$JAVA_HOME&#x2F;bin</span><br><span class="line">#（！！！注意：JAVA_HOME的路径是你实际解压后的JDK的路径，千万别写错了）</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>3.点击键盘<code>ESC</code>，输入<code>:wp </code>退出并保存文件</p>
+<p><img data-src="/Users/jwang/Desktop/blog/source/images/hadoop/%E6%B7%BB%E5%8A%A0java%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F.png" alt="image-20201115203430227"></p>
+<p>4.<code>source .bashrc</code> #让设置的变量马上生效，否则得重启生效</p>
+<p><img data-src="/Users/jwang/Desktop/blog/source/images/hadoop/java%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E7%94%9F%E6%95%88.png" alt="image-20201115203528255"></p>
+<p><strong>查看Java版本</strong></p>
+<p><img data-src="/Users/jwang/Desktop/blog/source/images/hadoop/%E6%9F%A5%E7%9C%8Bjava%E7%89%88%E6%9C%AC.png" alt="image-20201115203631216"></p>
+<h3 id="Hadoop单节点安装教程"><a href="#Hadoop单节点安装教程" class="headerlink" title="Hadoop单节点安装教程"></a>Hadoop单节点安装教程</h3><p><strong>下载hadoop2.9.2</strong></p>
+<p><img data-src="/Users/jwang/Desktop/blog/source/images/hadoop/hadoop%E4%B8%8B%E8%BD%BD.png" alt="image-20201115205552339"></p>
+<p><img data-src="/Users/jwang/Desktop/blog/source/images/hadoop/hadoop2.9.2.png" alt="image-20201115205643091"></p>
+<p><strong>同理，利用Xftp 将下载好的文件上传到服务器</strong></p>
+<p><img data-src="/Users/jwang/Desktop/blog/source/images/hadoop/%E4%B8%8A%E4%BC%A0hadoop.png" alt="image-20201115205851988"></p>
+<p><strong>输入<code>tar -xzvf hadoop-2.9.2.tar.gz</code></strong></p>
+<p><img data-src="/Users/jwang/Desktop/blog/source/images/hadoop/%E8%A7%A3%E5%8E%8Bhadoop.png" alt="image-20201115210120128"></p>
+<p><strong>配置hadoop</strong></p>
+<p>1.首先创建namenode和datanode目录</p>
+<p>2.分别输入 <code>mkdir -p hadoop_tmp/hdfs/namenode </code></p>
+<p>​                   <code>mkdir -p hadoop_tmp/hdfs/datanode</code></p>
+<p><img data-src="/Users/jwang/Desktop/blog/source/images/hadoop/%E5%88%9B%E5%BB%BAnamenode%E5%92%8Cdatanode.png" alt="image-20201115210543729"></p>
+<p><strong>配置hadoop环境变量</strong></p>
+<p>1.终端输入<code>vi ~/.bashrc</code></p>
+<p>2.首先修改JAVA_HOME，由于上面配置java环境变量已经设置，所以将其更改一下，这里很关键，一定要操作对</p>
+<p>3.插入下列代码配置hadoop环境变量</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">export HADOOP_HOME&#x3D;&#x2F;root&#x2F;hadoop-2.9.2</span><br><span class="line">export PATH&#x3D;$PATH:$HADOOP_HOME&#x2F;bin</span><br><span class="line">export PATH&#x3D;$PATH:$HADOOP_HOME&#x2F;sbin</span><br><span class="line">export HADOOP_MAPRED_HOME&#x3D;$HADOOP_HOME</span><br><span class="line">export HADOOP_COMMON_HOME&#x3D;$HADOOP_HOME</span><br><span class="line">export HADOOP_HDFS_HOME&#x3D;$HADOOP_HOME</span><br><span class="line">export YARN_HOME&#x3D;$HADOOP_HOME</span><br><span class="line">export HADOOP_COMMON_LIB_NATIVE_DIR&#x3D;$HADOOP_HOME&#x2F;lib&#x2F;native</span><br><span class="line">export HADOOP_OPTS&#x3D;&quot;-Djava.library.path&#x3D;$HADOOP_HOME&#x2F;lib&quot;</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p><img data-src="/Users/jwang/Desktop/blog/source/images/hadoop/hadoop%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE.png" alt="image-20201115211406499"></p>
+<p>4.键盘<code>ESC</code>输入<code>:wq</code>保存退出，并且输入<code>source ~/.bashrc</code>使其生效</p>
+<p>5.输入<code>vi etc/hadoop/hadoop-env.sh</code> 修改JAVA_HOME</p>
+<p><code> export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64</code></p>
+<p>或者<code>  export JAVA_HOME=/root/hadoop-2.9.2</code></p>
+<p><img data-src="/Users/jwang/Desktop/blog/source/images/hadoop/hadoop.png" alt="image-20201115215119206"></p>
+<p><strong>更新hadoop配置文件（四个文件）</strong></p>
+<p>1.终端进入<code>cd ~/hadoop-2.9.2</code>(hadoop解压后的地址) 修改<code>vi etc/hadoop/core-site.xml</code></p>
+<p><img data-src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20201115212003747.png" alt="image-20201115212003747"></p>
+<p>2.插入以下</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#Add those lines in the configuration section</span><br><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;fs.default.name&lt;&#x2F;name&gt;</span><br><span class="line">  &lt;value&gt;hdfs:&#x2F;&#x2F;localhost:9000&lt;&#x2F;value&gt;</span><br><span class="line">&lt;&#x2F;property&gt;</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<p><img data-src="/Users/jwang/Desktop/blog/source/images/hadoop/%E4%BF%AE%E6%94%B9core-site.xml.png" alt="image-20201115212527973"></p>
+<p><strong>如果上述vi修改麻烦可以在本地修改后通过xftp传到对应目录下覆盖</strong></p>
+<p><img data-src="/Users/jwang/Desktop/blog/source/images/hadoop/xftp%E4%B8%8A%E4%BC%A0hadoop%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6.png" alt="image-20201115212929054"></p>
+<p><strong>剩下三个文件同理这里就不一一赘述，贴上需要修改的文件和代码</strong></p>
+<p>第二个文件： hdfs-site.xml  </p>
+<p>注：截图红框地址的刚才创建的namenode和datanode的地址，记得修改成自己的</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#Add those lines in the configuration section</span><br><span class="line">&lt;property&gt;</span><br><span class="line">      &lt;name&gt;dfs.replication&lt;&#x2F;name&gt;</span><br><span class="line">      &lt;value&gt;1&lt;&#x2F;value&gt;</span><br><span class="line"> &lt;&#x2F;property&gt;</span><br><span class="line"> &lt;property&gt;</span><br><span class="line">      &lt;name&gt;dfs.namenode.name.dir&lt;&#x2F;name&gt;</span><br><span class="line">      &lt;value&gt;file:&#x2F;home&#x2F;hduser&#x2F;hadoop_tmp&#x2F;hdfs&#x2F;namenode&lt;&#x2F;value&gt;</span><br><span class="line"> &lt;&#x2F;property&gt;</span><br><span class="line"> &lt;property&gt;</span><br><span class="line">      &lt;name&gt;dfs.datanode.data.dir&lt;&#x2F;name&gt;</span><br><span class="line">      &lt;value&gt;file:&#x2F;home&#x2F;hduser&#x2F;hadoop_tmp&#x2F;hdfs&#x2F;datanode&lt;&#x2F;value&gt;</span><br><span class="line"> &lt;&#x2F;property&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img data-src="/Users/jwang/Desktop/blog/source/images/hadoop/hdfs-site.png" alt="image-20201115214025444"></p>
+<p>第三个文件： yarn-site.xml </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#Add those lines in the configuration section</span><br><span class="line">&lt;property&gt;</span><br><span class="line">      &lt;name&gt;yarn.nodemanager.aux-services&lt;&#x2F;name&gt;</span><br><span class="line">      &lt;value&gt;mapreduce_shuffle&lt;&#x2F;value&gt;</span><br><span class="line">&lt;&#x2F;property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">      &lt;name&gt;yarn.nodemanager.aux-services.mapreduce.shuffle.class&lt;&#x2F;name&gt;</span><br><span class="line">      &lt;value&gt;org.apache.hadoop.mapred.ShuffleHandler&lt;&#x2F;value&gt;</span><br><span class="line">&lt;&#x2F;property&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img data-src="/Users/jwang/Desktop/blog/source/images/hadoop/yarn-site.png" alt="image-20201115213656328"></p>
+<p>第四个文件： mapred-site.xml </p>
+<p>这个文件需要先进入<code>cd hadoop-2.9.2</code>执行<code>cp etc/hadoop/mapred-site.xml.template mapred-site.xml </code></p>
+<p>然后添加下列代码</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#Add those lines in the configuration section</span><br><span class="line">&lt;property&gt;</span><br><span class="line">      &lt;name&gt;mapreduce.framework.name&lt;&#x2F;name&gt;</span><br><span class="line">      &lt;value&gt;yarn&lt;&#x2F;value&gt;</span><br><span class="line">&lt;&#x2F;property&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img data-src="/Users/jwang/Desktop/blog/source/images/hadoop/mapred-site.png" alt="image-20201115213738597"></p>
+<p><strong>禁用</strong>   </p>
+<p><strong>PS：为何要禁用</strong>（参考wiki：<a href="https://cwiki.apache.org/confluence/display/HADOOP2/HadoopIPv6%EF%BC%89">https://cwiki.apache.org/confluence/display/HADOOP2/HadoopIPv6）</a></p>
+<p><strong>输入 <code>sudo vi /etc/sysctl.conf  </code>插入下列</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#Append the following lines at the end of the file</span><br><span class="line">net.ipv6.conf.all.disable_ipv6 &#x3D; 1</span><br><span class="line">net.ipv6.conf.default.disable_ipv6 &#x3D; 1</span><br><span class="line">net.ipv6.conf.lo.disable_ipv6 &#x3D; 1</span><br></pre></td></tr></table></figure>
+
+<p><img data-src="/Users/jwang/Desktop/blog/source/images/hadoop/%E7%A6%81%E7%94%A8IPv6.png" alt="image-20201115205232721"></p>
+<p><strong>格式化namenode</strong></p>
+<p>终端输入 <code>hdfs namenode -format </code></p>
+<p><img data-src="/Users/jwang/Desktop/blog/source/images/hadoop/%E6%A0%BC%E5%BC%8F%E5%8C%96namenode.png" alt="image-20201115222214199"></p>
+<p><strong>开启hadoop分布式文件系统</strong></p>
+<p>终端输入<code>start-dfs.sh</code></p>
+<p>如果没有设置ssh 密钥对的话要输入密码登录，想要免密登录见下个部分</p>
+<p><img data-src="/Users/jwang/Desktop/blog/source/images/hadoop/hdfs.png" alt="image-20201115222516500"></p>
+<p><strong>开启mapreduce</strong></p>
+<p>终端输入<code>start-yarn.sh </code></p>
+<p><strong>开启作业历史服务</strong></p>
+<p>终端输入<code>mr-jobhistory-daemon.sh start historyserver</code></p>
+<p><strong>验证是否成功</strong>（成功看到7个节点开启才算成功，如果某个节点或者任务没开启请移步日志）</p>
+<p><img data-src="/Users/jwang/Desktop/blog/source/images/hadoop/%E5%8D%95%E8%8A%82%E7%82%B9%E9%AA%8C%E8%AF%81.png" alt="image-20201115224056805"></p>
+<p><strong>实现免密登录</strong></p>
+<p>1.首先在master服务器上输入<code>ssh-keygen -t rsa</code>生成SSH秘钥对</p>
+<p><img data-src="/Users/jwang/Desktop/blog/source/images/hadoop/masterssh.png" alt="image-20201115225957720"></p>
+<p>2.还是在master上给.ssh文件夹设置权限，否则等下使用ssh连接时报错</p>
+<p>终端输入<code>chmod 600 ~/.ssh</code></p>
+<p>3.讲master的公钥复制到slave3上</p>
+<p>终端执行<code>scp .ssh/id_rsa.pub root@47.97.9.116 /root/.ssh/authorized_keys</code></p>
+<p>需要输入slave3的登录密码</p>
+<p><img data-src="/Users/jwang/Desktop/blog/source/images/hadoop/ssh1.png" alt="image-20201115230808919"></p>
+<p>至此，执行ssh slave3的公网ip比如（ssh 47.8.9.0）就可以实现免密登录到slave3了</p>
+<p>4.在master服务器上修改hosts以及hostname</p>
+<p>终端执行<code>hostname master</code>后重新连接服务器就可以看到主机名的变化</p>
+<p>终端修改/etc/hosts </p>
+<p><img data-src="/Users/jwang/Desktop/blog/source/images/hadoop/hosts.png" alt="image-20201115231615671"></p>
+<p>5.执行ssh slave3或者ssh slave3的公网ip都可以实现从master免密登录到slave3（归功于上一步）</p>
 ]]></content>
+      <categories>
+        <category>Hadoop</category>
+      </categories>
+      <tags>
+        <tag>Hadoop</tag>
+        <tag>Java</tag>
+        <tag>ssh</tag>
+      </tags>
   </entry>
   <entry>
     <title>linux</title>
@@ -169,12 +275,12 @@
 <h3 id="解决ubuntu分辨率问题"><a href="#解决ubuntu分辨率问题" class="headerlink" title="解决ubuntu分辨率问题"></a>解决ubuntu分辨率问题</h3><p><a href="https://blog.csdn.net/simmonloyld/article/details/87393775">https://blog.csdn.net/simmonloyld/article/details/87393775</a></p>
 <h3 id="显卡，显卡驱动-nvcc-cuda-driver-cudatoolkit-cudnn"><a href="#显卡，显卡驱动-nvcc-cuda-driver-cudatoolkit-cudnn" class="headerlink" title="显卡，显卡驱动,nvcc, cuda driver,cudatoolkit,cudnn"></a>显卡，显卡驱动,nvcc, cuda driver,cudatoolkit,cudnn</h3><p> <a href="https://zhuanlan.zhihu.com/p/91334380">https://zhuanlan.zhihu.com/p/91334380</a> </p>
 <p><strong>CUDA Toolkit</strong> 包括 <strong>1.Compiler</strong>: CUDA-C和CUDA-C++编译器<code>NVCC</code>  <strong>2.Tools</strong>: 提供一些像<code>profiler</code>,<code>debuggers</code>等工具  <strong>3.Libraries</strong>: 下面列出的部分科学库和实用程序库  <strong>4.CUDA Samples</strong>: 演示如何使用各种CUDA和library API的代码示例  <strong>5.CUDA Driver</strong>: 运行CUDA应用程序需要系统至少有一个<strong>具有CUDA功能的GPU</strong>和<strong>与CUDA工具包兼容的驱动程序</strong>  </p>
-<p><img src="https://pic1.zhimg.com/80/v2-fc8c720a858b6c2583b09f0228c4b3e0_720w.jpg" alt="img"></p>
+<p><img data-src="https://pic1.zhimg.com/80/v2-fc8c720a858b6c2583b09f0228c4b3e0_720w.jpg" alt="img"></p>
 <p>而显卡GPU driver功能上等价于cuda toolkit里面的cuda driver。但cuda有两个API Runtime API和Driver API ，这两个API都有对应的CUDA版本 ， </p>
 <p>用于支持<strong>driver API</strong>的必要文件(如<code>libcuda.so</code>)是由<strong>GPU driver installer</strong>安装的。<code>nvidia-smi</code>就属于这一类API。  </p>
 <p>用于支持<strong>runtime API</strong>的必要文件(如<code>libcudart.so</code>以及<code>nvcc</code>)是由<strong>CUDA Toolkit installer</strong>安装的。（<strong>CUDA Toolkit Installer有时可能会集成了GPU driver Installer</strong>）。<code>nvcc</code>是与CUDA Toolkit一起安装的CUDA compiler-driver tool，它只知道它自身构建时的CUDA runtime版本。它不知道安装了什么版本的GPU driver，甚至不知道是否安装了GPU driver。  </p>
 <p>如果driver API和runtime API的CUDA版本不一致可能是因为使用的是单独的（显卡）GPU driver installer，而不是CUDA Toolkit installer里的GPU driver installer。 </p>
-<p> <img src="https://pic3.zhimg.com/80/v2-a1f1d9f699697a8e05979abf749fbeae_720w.jpg" alt="img"> </p>
+<p> <img data-src="https://pic3.zhimg.com/80/v2-a1f1d9f699697a8e05979abf749fbeae_720w.jpg" alt="img"> </p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">检测pytorch在当前cuda版本中是可用</span><br><span class="line">import torch </span><br><span class="line">print(torch.cuda.is_available())</span><br><span class="line"></span><br><span class="line">torch.cuda.get_device_name(0)</span><br></pre></td></tr></table></figure>
 
 <h3 id="docker"><a href="#docker" class="headerlink" title="docker"></a>docker</h3><p>docker image ls  # 列出本机的所有 image 文件 </p>
