@@ -125,8 +125,8 @@
       </tags>
   </entry>
   <entry>
-    <title>linux</title>
-    <url>/2019/09/15/linux/</url>
+    <title>Notes</title>
+    <url>/2019/09/15/Notes/</url>
     <content><![CDATA[<div id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
   <div class="hbe-input-container">
   <input type="password" id="hbePass" placeholder="" />
@@ -137,7 +137,7 @@
 </div>
 <script src="/lib/blog-encrypt.js"></script><link href="/css/blog-encrypt.css" rel="stylesheet" type="text/css">]]></content>
       <categories>
-        <category>linux</category>
+        <category>Notes</category>
       </categories>
       <tags>
         <tag>linux</tag>
