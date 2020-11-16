@@ -29,6 +29,16 @@
   <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
   <link rel="stylesheet" href="/lib/pace/pace-theme-mac-osx.min.css">
   <script src="/lib/pace/pace.min.js"></script>
+  <script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误');
+                history.back();
+            }
+        }
+    })();
+  </script>
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"758765226.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"manual"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
@@ -42,7 +52,7 @@
 <meta property="og:site_name" content="MLer">
 <meta property="og:description" content="浑水摸鱼的咸鱼">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:author" content="jwang">
+<meta property="article:author" content="夏天">
 <meta property="article:tag" content="ML,Linux,C++">
 <meta name="twitter:card" content="summary">
 
@@ -214,7 +224,7 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="jwang">
+      <meta itemprop="name" content="夏天">
       <meta itemprop="description" content="浑水摸鱼的咸鱼">
     </span>
 
@@ -233,10 +243,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-11-15 15:15:15 / 修改时间：23:35:53" itemprop="dateCreated datePublished" datetime="2020-11-15T15:15:15+08:00">2020-11-15</time>
+              <time title="创建时间：2020-11-15 15:15:15" itemprop="dateCreated datePublished" datetime="2020-11-15T15:15:15+08:00">2020-11-15</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-11-16 11:06:15" itemprop="dateModified" datetime="2020-11-16T11:06:15+08:00">2020-11-16</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -306,11 +322,11 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://758765226.github.io/2015/08/15/linux/">
+    <link itemprop="mainEntityOfPage" href="http://758765226.github.io/2019/09/15/linux/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="jwang">
+      <meta itemprop="name" content="夏天">
       <meta itemprop="description" content="浑水摸鱼的咸鱼">
     </span>
 
@@ -320,7 +336,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2015/08/15/linux/" class="post-title-link" itemprop="url">linux</a>
+            <a href="/2019/09/15/linux/" class="post-title-link" itemprop="url">linux</a>
         </h2>
 
         <div class="post-meta">
@@ -330,14 +346,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2015-08-15 15:15:15" itemprop="dateCreated datePublished" datetime="2015-08-15T15:15:15+08:00">2015-08-15</time>
+              <time title="创建时间：2019-09-15 15:15:15" itemprop="dateCreated datePublished" datetime="2019-09-15T15:15:15+08:00">2019-09-15</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-11-14 16:35:33" itemprop="dateModified" datetime="2020-11-14T16:35:33+08:00">2020-11-14</time>
+                <time title="修改时间：2020-11-16 11:31:21" itemprop="dateModified" datetime="2020-11-16T11:31:21+08:00">2020-11-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -350,7 +366,7 @@
             </span>
 
           
-            <span id="/2015/08/15/linux/" class="post-meta-item leancloud_visitors" data-flag-title="linux" title="阅读次数">
+            <span id="/2019/09/15/linux/" class="post-meta-item leancloud_visitors" data-flag-title="linux" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -365,8 +381,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2015/08/15/linux/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2015/08/15/linux/" itemprop="commentCount"></span>
+    <a title="valine" href="/2019/09/15/linux/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/09/15/linux/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -381,10 +397,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="Linux-等常见问题"><a href="#Linux-等常见问题" class="headerlink" title="Linux 等常见问题"></a>Linux 等常见问题</h3>
+          这是一篇加密文章，内容可能是个人情感宣泄或者嘿嘿。如果你确实想看，请与我联系!
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2015/08/15/linux/#more" rel="contents">
+              <a class="btn" href="/2019/09/15/linux/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -462,9 +478,9 @@
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="jwang"
+    <img class="site-author-image" itemprop="image" alt="夏天"
       src="/images/avatar.jpg">
-  <p class="site-author-name" itemprop="name">jwang</p>
+  <p class="site-author-name" itemprop="name">夏天</p>
   <div class="site-description" itemprop="description">浑水摸鱼的咸鱼</div>
 </div>
 <div class="site-state-wrap motion-element">
@@ -540,7 +556,7 @@
   <span class="with-love">
     <i class="fas fa-piggy-bank"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">jwang</span>
+  <span class="author" itemprop="copyrightHolder">夏天</span>
 </div><script color="0,0,255" opacity="0.5" zIndex="-1" count="99" src="https://cdn.jsdelivr.net/npm/canvas-nest.js@1/dist/canvas-nest.js"></script>
 
 
