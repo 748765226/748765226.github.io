@@ -7,6 +7,7 @@
 
 <p>本教程只记录个人安装Hadoop时的心得以及所踩的坑，若有不对之处欢迎指出交流！</p>
 <p>本教程所需文件和工具教程都放到我的<a href="https://github.com/748765226/hadoop">repo</a>，有任何问题随时欢迎在评论区留言以及右下角即时通信。</p>
+<p><strong>注意！！！需要hadoop和jdk安装包的话，需要点进去具体资源进行下载，直接下载我的分支会出现问题。</strong></p>
 <h3 id="问题总结："><a href="#问题总结：" class="headerlink" title="问题总结："></a>问题总结：</h3><p>1.Hadoop 2.x namenode界面访问端口默认是50070</p>
 <p>   Hadoop 3.x namenode界面访问端口默认是9870</p>
 <p>2.关于JAVA的环境变量以及<code>JAVA_HOME=xxx</code>一定要配置对，这里是解压后的地址。如果是通过apt安装的，则需要自行去找一下安装目录，一般默认是<code>/usr/local/jvm/xxx</code>。</p>
@@ -21,7 +22,7 @@
 </ul>
 <h3 id="本次教程使用的是Java-8和hadoop-2-9-2，总共分为四个部分，Java安装，hadoop单节点安装，ssh免密通信以及hadoop多节点安装"><a href="#本次教程使用的是Java-8和hadoop-2-9-2，总共分为四个部分，Java安装，hadoop单节点安装，ssh免密通信以及hadoop多节点安装" class="headerlink" title="本次教程使用的是Java 8和hadoop 2.9.2，总共分为四个部分，Java安装，hadoop单节点安装，ssh免密通信以及hadoop多节点安装"></a>本次教程使用的是Java 8和hadoop 2.9.2，总共分为四个部分，Java安装，hadoop单节点安装，ssh免密通信以及hadoop多节点安装</h3><h3 id="第一部分：Java安装教程"><a href="#第一部分：Java安装教程" class="headerlink" title="第一部分：Java安装教程"></a>第一部分：Java安装教程</h3><p><strong>下载JDK 8</strong>        </p>
 <p><a href="https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html">JDK 8</a></p>
-<p>如果上面链接失效或者无法登陆，请移步我的<a href="https://github.com/748765226/hadoop">GitHub</a>下载</p>
+<p>如果上面链接失效或者无法登陆，请移步<a href="https://media.githubusercontent.com/media/748765226/hadoop/main/jdk-8u271-linux-x64.tar.gz">JDK 8</a>下载</p>
 <p> <img data-src="https://i.loli.net/2020/11/16/YoRk2V7CP5UXEDz.png"> </p>
 <p><strong>将下载好的Java 8压缩包传进服务器，推荐使用sftp命令或者软件Xftp</strong></p>
 <p><img data-src="https://i.loli.net/2020/11/16/MY5UQVd8ykNuvLs.png"> </p>
