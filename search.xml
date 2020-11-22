@@ -13,7 +13,8 @@
 <p>2.关于JAVA的环境变量以及<code>JAVA_HOME=xxx</code>一定要配置对，这里是解压后的地址。如果是通过apt安装的，则需要自行去找一下安装目录，一般默认是<code>/usr/local/jvm/xxx</code>。</p>
 <p>3.Hadoop的环境变量也要根据自己的安装版本和安装目录来修改。</p>
 <p>4.Hadoop的四个主要配置文件代码格式要严格按照xml文件格式，并且也要根据具体的Hadoop版本和安装目录进行修改。</p>
-<p>如果上述情况避开了，还遇到namenode或者datanode打不开的问题，请大家移步安装目录下logs找到对应节点的日志下拉到最底下，找到错误自行百度或者评论区留言。</p>
+<p>5.如果上述情况避开了，还遇到namenode或者datanode打不开的问题，请大家移步安装目录下logs找到对应节点的日志下拉到最底下，找到错误自行百度或者评论区留言。</p>
+<p><strong>！！！终极大招，不太推荐使用，除非实在解决不了配置问题，又不想重搭环境，并且可以承担之前跑的数据丢失的情况的话，可以执行 <code>rm -rf hadoop_tmp</code> 和 <code>rm -rf logs</code>，hadoop_tmp为第二部分第二小节创建的目录。</strong></p>
 <h3 id="Hadoop-Java对应版本号"><a href="#Hadoop-Java对应版本号" class="headerlink" title="Hadoop Java对应版本号"></a>Hadoop Java对应版本号</h3><ul>
 <li><p>Apache Hadoop 3.x 版本 现在只支持 Java 8</p>
 </li>
@@ -91,7 +92,7 @@
 
 <p> <img data-src="https://s3.ax1x.com/2020/11/16/Dk1R3T.png"> </p>
 <p><strong>禁用</strong>   </p>
-<p><strong>PS：为何要禁用</strong>（参考wiki：<a href="https://cwiki.apache.org/confluence/display/HADOOP2/HadoopIPv6%EF%BC%89">https://cwiki.apache.org/confluence/display/HADOOP2/HadoopIPv6）</a></p>
+<p><strong>PS：为何要禁用</strong>（参考<a href="https://cwiki.apache.org/confluence/display/HADOOP2/HadoopIPv6">wiki</a>）</p>
 <p><strong>输入 <code>sudo vi /etc/sysctl.conf  </code>插入下列</strong></p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#Append the following lines at the end of the file</span><br><span class="line">net.ipv6.conf.all.disable_ipv6 &#x3D; 1</span><br><span class="line">net.ipv6.conf.default.disable_ipv6 &#x3D; 1</span><br><span class="line">net.ipv6.conf.lo.disable_ipv6 &#x3D; 1</span><br></pre></td></tr></table></figure>
 
@@ -121,7 +122,94 @@
 <p>终端修改/etc/hosts </p>
 <p> <img data-src="https://s3.ax1x.com/2020/11/16/Dk3uan.png"> </p>
 <p>5.执行ssh slave3或者ssh slave3的公网ip都可以实现从master免密登录到slave3（归功于上一步）</p>
-<h3 id="第四部分：Hadoop多节点搭建"><a href="#第四部分：Hadoop多节点搭建" class="headerlink" title="第四部分：Hadoop多节点搭建"></a>第四部分：Hadoop多节点搭建</h3><p>待续…</p>
+<h3 id="第四部分：Hadoop多节点搭建"><a href="#第四部分：Hadoop多节点搭建" class="headerlink" title="第四部分：Hadoop多节点搭建"></a>第四部分：Hadoop多节点搭建</h3><p><strong>多节点的搭建基本上是建立在单节点的基础之上。主要修改hadoop的四个主要配置文件和以及ssh免密登录</strong></p>
+<p>在master节点上操作</p>
+<p>1.修改 core-site.xml 输入 <code>vi etc/hadoop/core-site.xml</code> 更新localhost为master</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;configuration&gt;   </span><br><span class="line">	&lt;property&gt;     </span><br><span class="line">		&lt;name&gt;fs.default.name&lt;&#x2F;name&gt;     </span><br><span class="line">		&lt;value&gt;hdfs:&#x2F;&#x2F;master:9000&lt;&#x2F;value&gt;   </span><br><span class="line">	&lt;&#x2F;property&gt; </span><br><span class="line">&lt;&#x2F;configuration&gt; </span><br></pre></td></tr></table></figure>
+
+<p> <img data-src="https://s3.ax1x.com/2020/11/22/DGVRH0.png"> </p>
+<p>2.修改 hdfs-site.xml  输入<code>vi etc/hadoop/hdfs-site.xml</code> 更新<code>dfs.replication</code>的value值为4</p>
+<p> <img data-src="https://s3.ax1x.com/2020/11/22/DGVfEV.png"> </p>
+<p>3.修改 yarn-site.xml  输入<code>vi etc/hadoop/yarn-site.xml</code> 添加下列</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;property&gt;       </span><br><span class="line">    &lt;name&gt;yarn.resourcemanager.resource-tracker.address&lt;&#x2F;name&gt;</span><br><span class="line">    &lt;value&gt;master:8025&lt;&#x2F;value&gt;        </span><br><span class="line">&lt;&#x2F;property&gt;  </span><br><span class="line">&lt;property&gt;       </span><br><span class="line">    &lt;name&gt;yarn.resourcemanager.scheduler.address&lt;&#x2F;name&gt;       </span><br><span class="line">    &lt;value&gt;master:8035&lt;&#x2F;value&gt; </span><br><span class="line">&lt;&#x2F;property&gt;       </span><br><span class="line">&lt;property&gt;       </span><br><span class="line">    &lt;name&gt;yarn.resourcemanager.address&lt;&#x2F;name&gt;       </span><br><span class="line">    &lt;value&gt;master:8050&lt;&#x2F;value&gt; </span><br><span class="line">&lt;&#x2F;property&gt; </span><br><span class="line">&lt;property&gt;             </span><br><span class="line">	&lt;name&gt;yarn.nodemanager.resource.memory-mb&lt;&#x2F;name&gt;             </span><br><span class="line">	&lt;value&gt;2048&lt;&#x2F;value&gt;      </span><br><span class="line">&lt;&#x2F;property&gt; </span><br></pre></td></tr></table></figure>
+
+<p> <img data-src="https://s3.ax1x.com/2020/11/22/DGVhNT.png"> </p>
+<p>4.修改 mapred-site.xml 修改<code>vi etc/hadoop/mapred-site.xml</code>添加下列</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;property&gt;     </span><br><span class="line">    &lt;name&gt;mapreduce.job.tracker&lt;&#x2F;name&gt;     </span><br><span class="line">    &lt;value&gt;master:5431&lt;&#x2F;value&gt; </span><br><span class="line">&lt;&#x2F;property&gt; </span><br><span class="line">&lt;property&gt;             </span><br><span class="line">	&lt;name&gt;mapred.framework.name&lt;&#x2F;name&gt;             </span><br><span class="line">	&lt;value&gt;yarn&lt;&#x2F;value&gt;      </span><br><span class="line">&lt;&#x2F;property&gt;</span><br></pre></td></tr></table></figure>
+
+<p> <img data-src="https://s3.ax1x.com/2020/11/22/DGV2Bq.png"> </p>
+<p>5.修改 masters 输入<code>vi etc/hadoop/masters</code> 添加 master</p>
+<p> <img data-src="https://s3.ax1x.com/2020/11/22/DGVgun.png"> </p>
+<p>6.修改 slaves <code>vi etc/hadoop/slaves</code>   添加 slave1 slave2 slave3</p>
+<p> <img data-src="https://s3.ax1x.com/2020/11/22/DGV44U.png"> </p>
+<p>7.修改主机名 <code>hostnamectl sethostname master</code> 注：在slave节点就对应改成slave 1，slave2，slave3</p>
+<p>​    之后重新ssh登录就可以看到了</p>
+<p>8.修改/etc/hosts 输入<code>vi /etc/hosts</code>    添加如下 </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">xxxx  master # xxxx对应master的内网ip</span><br><span class="line">xxxx  slave1 # slave1的内网ip</span><br><span class="line">xxxx  slave2 # slave2的内网ip</span><br><span class="line">xxxx  slave3 # slave3的内网ip</span><br></pre></td></tr></table></figure>
+
+<p> <img data-src="https://s3.ax1x.com/2020/11/22/DGVICF.png"> </p>
+<p><strong>！！！这里有个大坑，这里的ip一定要用内网，别问为什么，并且要将原来的内网ip注释掉</strong></p>
+<p>9.生成ssh密钥对，输入<code>ssh-keygen -t rsa</code> 如果之前执行过可以忽略</p>
+<p>接着执行 <code>cp ~/.ssh/id_rsa.pub ~/.ssh/authorized_keys</code></p>
+<p>10.执行<code>rm -rf hadoop_tmp</code>将之前创建的namenode和datanode删除</p>
+<p>至此，master上的修改已经全部结束。接下来部署从节点的配置，下面有两种方式：</p>
+<p>第一种是将master节点保存成镜像，然后再利用此镜像创建三个slave实例（推荐此方式，操作看截图）</p>
+<p> <img data-src="https://s3.ax1x.com/2020/11/22/DGVTgJ.png"> </p>
+<p> <img data-src="https://s3.ax1x.com/2020/11/22/DGVo34.png"> </p>
+<p> <img data-src="https://s3.ax1x.com/2020/11/22/DGVqD1.png"> </p>
+<p>第二种，从头分别搭建三个单节点（略过）</p>
+<p>11.1如果master节点和slave节点已经全部创建成功（第一种方式创建），则在master节点依次输入</p>
+<p><code>hdfs namenode -format</code></p>
+<p><code>start-dfs.sh</code></p>
+<p><code>start-yarn.sh</code></p>
+<p>11.2如果master节点和slave节点已经全部创建成功（第二种方式创建），则需要将master生成的公钥信息<code>~/.ssh/authorized_keys</code>分别复制到三个从节点的<code>~/.ssh/authorized_keys</code></p>
+<p>执行<code>scp ~/.ssh/id_rsa.pub root@slave的公网ip:~/.ssh/authorized_keys</code> 参考第三部分免密登录</p>
+<p>12.最后在master节点和slave节点上分别输入jps，查看结果。下图为正确结果，如果缺少则配置错误</p>
+<p> <img data-src="https://s3.ax1x.com/2020/11/22/DGV7v9.png"> </p>
+<h3 id="第五部分：词频统计-以下操作都在master节点进行"><a href="#第五部分：词频统计-以下操作都在master节点进行" class="headerlink" title="第五部分：词频统计(以下操作都在master节点进行)"></a>第五部分：词频统计(以下操作都在master节点进行)</h3><p>1.输入<code>wget https://github.com/hupili/agile-ir/raw/master/data/Shakespeare.tar.gz</code>下载小说集</p>
+<p>如果下载太慢，可以<a href="https://github.com/hupili/agile-ir/raw/master/data/Shakespeare.tar.gz">下载</a>到本地，然后通过xftp传进去服务器</p>
+<p>2.输入<code>tar-zxvf Shakespeare.tar.gz</code></p>
+<p>3.上传文件到hadoop文件系统上</p>
+<p>执行<code>hadoop dfs -copyFromLocal /root/hadoop-2.9.2/data /data</code></p>
+<p>本条指令执行将本地/root/hadoop-2.9.2/下的data 复制到hadoop文件系统的 根目录<code>/</code>下 <img data-src="https://s3.ax1x.com/2020/11/22/DGVbuR.png"> </p>
+<p>4.查看上传结果<code>hadoop dfs -ls /data</code></p>
+<p> <img data-src="https://s3.ax1x.com/2020/11/22/DGVXE6.png"> </p>
+<p>5.创建执行的脚本<code>vi word_count.sh</code> 输入以下</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hadoop jar share&#x2F;hadoop&#x2F;mapreduce&#x2F;hadoop-mapreduce-examples-2.9.2.jar wordcount &#x2F;data &#x2F;result</span><br></pre></td></tr></table></figure>
+
+
+
+<p>6.执行wordcout，查看结果</p>
+<p><code>bash word_count.sh</code></p>
+<p> <img data-src="https://s3.ax1x.com/2020/11/22/DGVjUK.png"> </p>
+<p> <img data-src="https://s3.ax1x.com/2020/11/22/DGVv4O.png"> </p>
+<p>7.分别执行</p>
+<p><code>hadoop dfs -ls /result</code></p>
+<p><code>hadoop dfs -cat /result/part-r-00000</code></p>
+<p> <img data-src="https://s3.ax1x.com/2020/11/22/DGVLHx.png"> </p>
+<p>8.查看web</p>
+<p>首先将端口打开</p>
+<p> <img data-src="https://s3.ax1x.com/2020/11/22/DGVzCD.png"> </p>
+<p> <img data-src="https://s3.ax1x.com/2020/11/22/DGZS8e.png"> </p>
+<p> <img data-src="https://s3.ax1x.com/2020/11/22/DGZ9vd.png"> </p>
+<p> <img data-src="https://s3.ax1x.com/2020/11/22/DGZpgH.png"> </p>
+<p>最后在浏览器输入<code>公网ip:端口号</code>即可查看结果</p>
+<p> <img data-src="https://s3.ax1x.com/2020/11/22/DGZPKA.png"> </p>
+<p>问题：</p>
+<p>1.如果遇到</p>
+<p><img data-src="https://s3.ax1x.com/2020/11/22/DGZiDI.png"> </p>
+<p>则 修改要保存的路径<code>vi word_count.sh</code></p>
+<p><img data-src="https://s3.ax1x.com/2020/11/22/DGZFbt.png"> </p>
+<p>或者执行<code>hadoop dfs -rm -r /result</code> 将hadoop文件系统生成/result删除，就不会报错了</p>
+<p>2.指定map和reduce的数量</p>
+<p>输入<code>vi word_count.sh</code> 添加<code> -D mapred.reduce.tasks=10</code>指定reduce的数量，具体见<a href="http://hadoop.apache.org/docs/stable1/streaming.html#Streaming+Command+Options">这</a>和<a href="http://blog.itpub.net/15498/viewspace-2136139/">这</a></p>
+<p><code>vi etc/hadoop/hdfs-site.xml</code> 值调大就可能减小map数量，调小就可能增大map数量</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;property&gt; </span><br><span class="line">	&lt;name&gt;dfs.block.size&lt;&#x2F;name&gt; </span><br><span class="line">	&lt;value&gt;256000000&lt;&#x2F;value&gt;    </span><br><span class="line">&lt;&#x2F;property&gt;</span><br></pre></td></tr></table></figure>
+
+<p>但map的数量直接用这样的形式更改不一定生效，具体见<a href="https://blog.csdn.net/lylcore/article/details/9136555">这</a></p>
+<p>完整命令<code>hadoop jar share/hadoop/mapreduce/hadoop-mapreduce-examples-2.9.2.jar wordcount -D mapred.reduce.tasks=10 /largefile /result2 </code></p>
+<p>3.如何进行自定map和reduce函数</p>
+<p>这里很详细就不再赘述，参考<a href="http://hadoop.apache.org/docs/stable1/streaming.html#Streaming+Command+Options">这</a></p>
 ]]></content>
       <categories>
         <category>Hadoop</category>
