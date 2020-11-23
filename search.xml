@@ -105,7 +105,7 @@
 
 <p><img data-src="https://i.loli.net/2020/11/16/pikKlZ3sdJXmaFb.png"> </p>
 <p>第四个文件： mapred-site.xml </p>
-<p>这个文件需要先进入<code>cd hadoop-2.9.2</code>执行<code>cp etc/hadoop/mapred-site.xml.template mapred-site.xml </code></p>
+<p>这个文件需要先进入<code>cd hadoop-2.9.2</code>执行<code>cp etc/hadoop/mapred-site.xml.template etc/hadoop/mapred-site.xml </code></p>
 <p>然后添加下列代码</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#Add those lines in the configuration section</span><br><span class="line">&lt;property&gt;</span><br><span class="line">      &lt;name&gt;mapreduce.framework.name&lt;&#x2F;name&gt;</span><br><span class="line">      &lt;value&gt;yarn&lt;&#x2F;value&gt;</span><br><span class="line">&lt;&#x2F;property&gt;</span><br></pre></td></tr></table></figure>
 
