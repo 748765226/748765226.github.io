@@ -63,7 +63,8 @@
 <h3 id="第二部分：Hadoop单节点安装教程"><a href="#第二部分：Hadoop单节点安装教程" class="headerlink" title="第二部分：Hadoop单节点安装教程"></a>第二部分：Hadoop单节点安装教程</h3><p><strong>下载hadoop2.9.2</strong></p>
 <p> <a href="http://ftp.cuhk.edu.hk/pub/packages/apache.org/hadoop/common/">Hadoop下载</a></p>
 <p><img data-src="https://i.loli.net/2020/11/16/HthS1TafLkOlBze.png"> </p>
-<p><img data-src="https://i.loli.net/2020/11/16/O4Q8NaeYPgbkK5p.png"> </p>
+<p>选择最下面那个</p>
+<p><img data-src="https://s3.ax1x.com/2020/11/23/DYiBa8.png"></p>
 <p><strong>同理，利用Xftp 将下载好的文件上传到服务器</strong></p>
 <p><img data-src="https://i.loli.net/2020/11/16/kNra1E6F4tsXUjq.png"> </p>
 <p><strong>输入<code>tar -xzvf hadoop-2.9.2.tar.gz</code></strong></p>
