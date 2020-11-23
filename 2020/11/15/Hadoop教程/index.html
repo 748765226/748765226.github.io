@@ -52,6 +52,8 @@
 <meta property="og:site_name" content="MLer">
 <meta property="og:description" content="Hadoop教程">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s3.ax1x.com/2020/11/22/DGZiDI.png">
+<meta property="og:image" content="https://s3.ax1x.com/2020/11/22/DGZFbt.png">
 <meta property="og:image" content="https://i.loli.net/2020/11/16/YoRk2V7CP5UXEDz.png">
 <meta property="og:image" content="https://i.loli.net/2020/11/16/MY5UQVd8ykNuvLs.png">
 <meta property="og:image" content="https://i.loli.net/2020/11/16/KP27owXC6UmWJZf.png">
@@ -100,16 +102,14 @@
 <meta property="og:image" content="https://s3.ax1x.com/2020/11/22/DGZ9vd.png">
 <meta property="og:image" content="https://s3.ax1x.com/2020/11/22/DGZpgH.png">
 <meta property="og:image" content="https://s3.ax1x.com/2020/11/22/DGZPKA.png">
-<meta property="og:image" content="https://s3.ax1x.com/2020/11/22/DGZiDI.png">
-<meta property="og:image" content="https://s3.ax1x.com/2020/11/22/DGZFbt.png">
 <meta property="article:published_time" content="2020-11-15T07:15:15.000Z">
-<meta property="article:modified_time" content="2020-11-22T12:58:38.690Z">
+<meta property="article:modified_time" content="2020-11-23T06:52:40.028Z">
 <meta property="article:author" content="夏天">
 <meta property="article:tag" content="Hadoop">
 <meta property="article:tag" content="Java">
 <meta property="article:tag" content="ssh">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://i.loli.net/2020/11/16/YoRk2V7CP5UXEDz.png">
+<meta name="twitter:image" content="https://s3.ax1x.com/2020/11/22/DGZiDI.png">
 
 <link rel="canonical" href="http://758765226.github.io/2020/11/15/Hadoop%E6%95%99%E7%A8%8B/">
 
@@ -306,7 +306,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-11-22 20:58:38" itemprop="dateModified" datetime="2020-11-22T20:58:38+08:00">2020-11-22</time>
+                <time title="修改时间：2020-11-23 14:52:40" itemprop="dateModified" datetime="2020-11-23T14:52:40+08:00">2020-11-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -355,13 +355,26 @@
 <p>本教程只记录个人安装Hadoop时的心得以及所踩的坑，若有不对之处欢迎指出交流！</p>
 <p>本教程所需文件和工具教程都放到我的<a target="_blank" rel="noopener" href="https://github.com/748765226/hadoop">repo</a>，有任何问题随时欢迎在评论区留言以及右下角即时通信。</p>
 <p><strong>注意！！！需要hadoop和jdk安装包的话，需要点进去具体资源进行下载，直接下载我的分支会出现问题。</strong></p>
-<h3 id="问题总结："><a href="#问题总结：" class="headerlink" title="问题总结："></a>问题总结：</h3><p>1.Hadoop 2.x namenode界面访问端口默认是50070</p>
+<h3 id="单节点问题总结："><a href="#单节点问题总结：" class="headerlink" title="单节点问题总结："></a>单节点问题总结：</h3><p>1.Hadoop 2.x namenode界面访问端口默认是50070</p>
 <p>   Hadoop 3.x namenode界面访问端口默认是9870</p>
 <p>2.关于JAVA的环境变量以及<code>JAVA_HOME=xxx</code>一定要配置对，这里是解压后的地址。如果是通过apt安装的，则需要自行去找一下安装目录，一般默认是<code>/usr/local/jvm/xxx</code>。</p>
 <p>3.Hadoop的环境变量也要根据自己的安装版本和安装目录来修改。</p>
 <p>4.Hadoop的四个主要配置文件代码格式要严格按照xml文件格式，并且也要根据具体的Hadoop版本和安装目录进行修改。</p>
 <p>5.如果上述情况避开了，还遇到namenode或者datanode打不开的问题，请大家移步安装目录下logs找到对应节点的日志下拉到最底下，找到错误自行百度或者评论区留言。</p>
-<p><strong>！！！终极大招，不太推荐使用，除非实在解决不了配置问题，又不想重搭环境，并且可以承担之前跑的数据丢失的情况的话，可以执行 <code>rm -rf hadoop_tmp</code> 和 <code>rm -rf logs</code>，hadoop_tmp为第二部分第二小节创建的目录。</strong></p>
+<h3 id="多节点问题总结："><a href="#多节点问题总结：" class="headerlink" title="多节点问题总结："></a>多节点问题总结：</h3><p>1.如果遇到</p>
+<p><img data-src="https://s3.ax1x.com/2020/11/22/DGZiDI.png"> </p>
+<p>则 修改要保存的路径<code>vi word_count.sh</code></p>
+<p><img data-src="https://s3.ax1x.com/2020/11/22/DGZFbt.png"> </p>
+<p>或者执行<code>hadoop dfs -rm -r /result</code> 将hadoop文件系统生成/result删除，就不会报错了</p>
+<p>2.指定map和reduce的数量</p>
+<p>输入<code>vi word_count.sh</code> 添加<code> -D mapred.reduce.tasks=10</code>指定reduce的数量，具体见<a target="_blank" rel="noopener" href="http://hadoop.apache.org/docs/stable1/streaming.html#Streaming+Command+Options">这</a>和<a target="_blank" rel="noopener" href="http://blog.itpub.net/15498/viewspace-2136139/">这</a></p>
+<p><code>vi etc/hadoop/hdfs-site.xml</code> 值调大就可能减小map数量，调小就可能增大map数量</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;property&gt; </span><br><span class="line">	&lt;name&gt;dfs.block.size&lt;&#x2F;name&gt; </span><br><span class="line">	&lt;value&gt;256000000&lt;&#x2F;value&gt;    </span><br><span class="line">&lt;&#x2F;property&gt;</span><br></pre></td></tr></table></figure>
+
+<p>但map的数量直接用这样的形式更改不一定生效，具体见<a target="_blank" rel="noopener" href="https://blog.csdn.net/lylcore/article/details/9136555">这</a></p>
+<p>完整命令<code>hadoop jar share/hadoop/mapreduce/hadoop-mapreduce-examples-2.9.2.jar wordcount -D mapred.reduce.tasks=10 /largefile /result2 </code></p>
+<p>3.如何进行自定map和reduce函数</p>
+<p>这里很详细就不再赘述，参考<a target="_blank" rel="noopener" href="http://hadoop.apache.org/docs/stable1/streaming.html#Streaming+Command+Options">这</a></p>
 <h3 id="Hadoop-Java对应版本号"><a href="#Hadoop-Java对应版本号" class="headerlink" title="Hadoop Java对应版本号"></a>Hadoop Java对应版本号</h3><ul>
 <li><p>Apache Hadoop 3.x 版本 现在只支持 Java 8</p>
 </li>
@@ -380,7 +393,7 @@
 <p>1.在终端输入 <code>cd</code> 进入~目录，修改环境变量，输入<code>vi .bashrc</code> </p>
 <p><img data-src="https://i.loli.net/2020/11/16/jI7VPwJuT2DLCmt.png"> </p>
 <p>2.点击键盘 <code>i</code> 或者<code>insert</code> 在末行添加下列</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_HOME&#x3D;&#x2F;root&#x2F;hadoop-2.9.2</span><br><span class="line">export CLASSPATH&#x3D;.:$JAVA_HOME&#x2F;jre&#x2F;lib&#x2F;rt.jar:$JAVA_HOME&#x2F;lib&#x2F;dt.jar:$JAVA_HOME&#x2F;lib&#x2F;tools.jar</span><br><span class="line">export PATH&#x3D;$PATH:$JAVA_HOME&#x2F;bin</span><br><span class="line">#（！！！注意：JAVA_HOME的路径是你实际解压后的JDK的路径，千万别写错了）</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_HOME&#x3D;&#x2F;root&#x2F;jdk1.8.0_271&#x2F;</span><br><span class="line">export CLASSPATH&#x3D;.:$JAVA_HOME&#x2F;jre&#x2F;lib&#x2F;rt.jar:$JAVA_HOME&#x2F;lib&#x2F;dt.jar:$JAVA_HOME&#x2F;lib&#x2F;tools.jar</span><br><span class="line">export PATH&#x3D;$PATH:$JAVA_HOME&#x2F;bin</span><br><span class="line">#（！！！注意：JAVA_HOME的路径是你实际解压后的JDK的路径，千万别写错了）</span><br></pre></td></tr></table></figure>
 
 <p>3.点击键盘<code>ESC</code>，输入<code>:wp </code>退出并保存文件</p>
 <p><img data-src="https://i.loli.net/2020/11/16/7uyQSRsGNYaoAXp.png"> </p>
@@ -410,7 +423,7 @@
 <p><img data-src="https://i.loli.net/2020/11/16/sJwmpYCGlt3TEfd.png"> </p>
 <p>4.键盘<code>ESC</code>输入<code>:wq</code>保存退出，并且输入<code>source ~/.bashrc</code>使其生效</p>
 <p>5.输入<code>vi etc/hadoop/hadoop-env.sh</code> 修改JAVA_HOME</p>
-<p><code>  export JAVA_HOME=/root/jdk1.8.0_271</code>  </p>
+<p>`  export JAVA_HOME=/root/jdk1.8.0_271/  </p>
 <p>#（！！！注意：JAVA_HOME的路径是你实际解压后的JDK的路径，千万别写错了）</p>
 <p><img data-src="https://i.loli.net/2020/11/16/2nyCsK4vkjqYpHI.png"> </p>
 <p><strong>更新hadoop配置文件（四个文件）</strong></p>
@@ -491,28 +504,51 @@
 <p> <img data-src="https://s3.ax1x.com/2020/11/22/DGV44U.png"> </p>
 <p>7.修改主机名 <code>hostnamectl sethostname master</code> 注：在slave节点就对应改成slave 1，slave2，slave3</p>
 <p>​    之后重新ssh登录就可以看到了</p>
-<p>8.修改/etc/hosts 输入<code>vi /etc/hosts</code>    添加如下 </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">xxxx  master # xxxx对应master的内网ip</span><br><span class="line">xxxx  slave1 # slave1的内网ip</span><br><span class="line">xxxx  slave2 # slave2的内网ip</span><br><span class="line">xxxx  slave3 # slave3的内网ip</span><br></pre></td></tr></table></figure>
+<p>8.修改/etc/hosts 输入<code>vi /etc/hosts</code>    添加如下  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">xxxx  master # xxxx对应master的内网ip</span><br><span class="line">xxxx  slave1 # slave1的内网ip</span><br><span class="line">xxxx  slave2 # slave2的内网ip</span><br><span class="line">xxxx  slave3 # slave3的内网ip</span><br><span class="line">#！！！如果这时候slave1 slave2 slave3没有创建，则先跳过，最后多节点搭完修改</span><br><span class="line">#！！！这里有个大坑，这里的ip一定要用内网，别问为什么，并且要将原来的内网ip注释掉</span><br></pre></td></tr></table></figure>
 
 <p> <img data-src="https://s3.ax1x.com/2020/11/22/DGVICF.png"> </p>
-<p><strong>！！！这里有个大坑，这里的ip一定要用内网，别问为什么，并且要将原来的内网ip注释掉</strong></p>
 <p>9.生成ssh密钥对，输入<code>ssh-keygen -t rsa</code> 如果之前执行过可以忽略</p>
 <p>接着执行 <code>cp ~/.ssh/id_rsa.pub ~/.ssh/authorized_keys</code></p>
 <p>10.执行<code>rm -rf hadoop_tmp</code>将之前创建的namenode和datanode删除</p>
 <p>至此，master上的修改已经全部结束。接下来部署从节点的配置，下面有两种方式：</p>
-<p>第一种是将master节点保存成镜像，然后再利用此镜像创建三个slave实例（推荐此方式，操作看截图）</p>
-<p> <img data-src="https://s3.ax1x.com/2020/11/22/DGVTgJ.png"> </p>
-<p> <img data-src="https://s3.ax1x.com/2020/11/22/DGVo34.png"> </p>
-<p> <img data-src="https://s3.ax1x.com/2020/11/22/DGVqD1.png"> </p>
-<p>第二种，从头分别搭建三个单节点（略过）</p>
-<p>11.1如果master节点和slave节点已经全部创建成功（第一种方式创建），则在master节点依次输入</p>
-<p><code>hdfs namenode -format</code></p>
-<p><code>start-dfs.sh</code></p>
-<p><code>start-yarn.sh</code></p>
-<p>11.2如果master节点和slave节点已经全部创建成功（第二种方式创建），则需要将master生成的公钥信息<code>~/.ssh/authorized_keys</code>分别复制到三个从节点的<code>~/.ssh/authorized_keys</code></p>
+<ul>
+<li><p>方法一：将master节点保存成镜像，然后再利用此镜像创建三个slave实例（推荐此方式，操作看截图）</p>
+<p><img data-src="https://s3.ax1x.com/2020/11/22/DGVTgJ.png"> </p>
+<p><img data-src="https://s3.ax1x.com/2020/11/22/DGVo34.png"> </p>
+<p><img data-src="https://s3.ax1x.com/2020/11/22/DGVqD1.png"> </p>
+</li>
+</ul>
+<ul>
+<li><p>方法二：从头分别搭建三个单节点</p>
+<p>如果master节点和slave节点已经全部创建成功，则需要将master生成的公钥信息<code>~/.ssh/authorized_keys</code>分别复制到三个从节点的<code>~/.ssh/authorized_keys</code></p>
 <p>执行<code>scp ~/.ssh/id_rsa.pub root@slave的公网ip:~/.ssh/authorized_keys</code> 参考第三部分免密登录</p>
+</li>
+</ul>
+<p>11.多节点搭建完成后，执行</p>
+<ul>
+<li><p><code>hdfs namenode -format</code></p>
+</li>
+<li><p><code>    start-dfs.sh</code></p>
+</li>
+<li><p><code>start-yarn.sh</code></p>
+</li>
+</ul>
 <p>12.最后在master节点和slave节点上分别输入jps，查看结果。下图为正确结果，如果缺少则配置错误</p>
 <p> <img data-src="https://s3.ax1x.com/2020/11/22/DGV7v9.png"> </p>
+<p>13.如果有任何报错解决不了，请分别在所有节点执行以下操作</p>
+<ul>
+<li><p><code>stop-all.sh</code> master节点执行</p>
+</li>
+<li><p><code>rm -rf ~/.ssh/known_hosts</code></p>
+</li>
+<li><p><code>rm -rf hadoop_tmp</code>  所有节点都要执行</p>
+</li>
+<li><p><code>rm -rf logs</code> 所有节点都要执行</p>
+</li>
+<li><p><code>start-all.sh</code> master节点执行</p>
+</li>
+</ul>
 <h3 id="第五部分：词频统计-以下操作都在master节点进行"><a href="#第五部分：词频统计-以下操作都在master节点进行" class="headerlink" title="第五部分：词频统计(以下操作都在master节点进行)"></a>第五部分：词频统计(以下操作都在master节点进行)</h3><p>1.输入<code>wget https://github.com/hupili/agile-ir/raw/master/data/Shakespeare.tar.gz</code>下载小说集</p>
 <p>如果下载太慢，可以<a target="_blank" rel="noopener" href="https://github.com/hupili/agile-ir/raw/master/data/Shakespeare.tar.gz">下载</a>到本地，然后通过xftp传进去服务器</p>
 <p>2.输入<code>tar-zxvf Shakespeare.tar.gz</code></p>
@@ -531,9 +567,13 @@
 <p> <img data-src="https://s3.ax1x.com/2020/11/22/DGVjUK.png"> </p>
 <p> <img data-src="https://s3.ax1x.com/2020/11/22/DGVv4O.png"> </p>
 <p>7.分别执行</p>
-<p><code>hadoop dfs -ls /result</code></p>
-<p><code>hadoop dfs -cat /result/part-r-00000</code></p>
-<p> <img data-src="https://s3.ax1x.com/2020/11/22/DGVLHx.png"> </p>
+<ul>
+<li><p><code>hadoop dfs -ls /result</code></p>
+</li>
+<li><p><code>hadoop dfs -cat /result/part-r-00000</code></p>
+<p><img data-src="https://s3.ax1x.com/2020/11/22/DGVLHx.png"> </p>
+</li>
+</ul>
 <p>8.查看web</p>
 <p>首先将端口打开</p>
 <p> <img data-src="https://s3.ax1x.com/2020/11/22/DGVzCD.png"> </p>
@@ -542,21 +582,6 @@
 <p> <img data-src="https://s3.ax1x.com/2020/11/22/DGZpgH.png"> </p>
 <p>最后在浏览器输入<code>公网ip:端口号</code>即可查看结果</p>
 <p> <img data-src="https://s3.ax1x.com/2020/11/22/DGZPKA.png"> </p>
-<p>问题：</p>
-<p>1.如果遇到</p>
-<p><img data-src="https://s3.ax1x.com/2020/11/22/DGZiDI.png"> </p>
-<p>则 修改要保存的路径<code>vi word_count.sh</code></p>
-<p><img data-src="https://s3.ax1x.com/2020/11/22/DGZFbt.png"> </p>
-<p>或者执行<code>hadoop dfs -rm -r /result</code> 将hadoop文件系统生成/result删除，就不会报错了</p>
-<p>2.指定map和reduce的数量</p>
-<p>输入<code>vi word_count.sh</code> 添加<code> -D mapred.reduce.tasks=10</code>指定reduce的数量，具体见<a target="_blank" rel="noopener" href="http://hadoop.apache.org/docs/stable1/streaming.html#Streaming+Command+Options">这</a>和<a target="_blank" rel="noopener" href="http://blog.itpub.net/15498/viewspace-2136139/">这</a></p>
-<p><code>vi etc/hadoop/hdfs-site.xml</code> 值调大就可能减小map数量，调小就可能增大map数量</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;property&gt; </span><br><span class="line">	&lt;name&gt;dfs.block.size&lt;&#x2F;name&gt; </span><br><span class="line">	&lt;value&gt;256000000&lt;&#x2F;value&gt;    </span><br><span class="line">&lt;&#x2F;property&gt;</span><br></pre></td></tr></table></figure>
-
-<p>但map的数量直接用这样的形式更改不一定生效，具体见<a target="_blank" rel="noopener" href="https://blog.csdn.net/lylcore/article/details/9136555">这</a></p>
-<p>完整命令<code>hadoop jar share/hadoop/mapreduce/hadoop-mapreduce-examples-2.9.2.jar wordcount -D mapred.reduce.tasks=10 /largefile /result2 </code></p>
-<p>3.如何进行自定map和reduce函数</p>
-<p>这里很详细就不再赘述，参考<a target="_blank" rel="noopener" href="http://hadoop.apache.org/docs/stable1/streaming.html#Streaming+Command+Options">这</a></p>
 
     </div>
 
@@ -678,7 +703,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Hadoop%E6%95%99%E7%A8%8B"><span class="nav-number">1.</span> <span class="nav-text">Hadoop教程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93%EF%BC%9A"><span class="nav-number">1.0.1.</span> <span class="nav-text">问题总结：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hadoop-Java%E5%AF%B9%E5%BA%94%E7%89%88%E6%9C%AC%E5%8F%B7"><span class="nav-number">1.0.2.</span> <span class="nav-text">Hadoop Java对应版本号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%AC%E6%AC%A1%E6%95%99%E7%A8%8B%E4%BD%BF%E7%94%A8%E7%9A%84%E6%98%AFJava-8%E5%92%8Chadoop-2-9-2%EF%BC%8C%E6%80%BB%E5%85%B1%E5%88%86%E4%B8%BA%E5%9B%9B%E4%B8%AA%E9%83%A8%E5%88%86%EF%BC%8CJava%E5%AE%89%E8%A3%85%EF%BC%8Chadoop%E5%8D%95%E8%8A%82%E7%82%B9%E5%AE%89%E8%A3%85%EF%BC%8Cssh%E5%85%8D%E5%AF%86%E9%80%9A%E4%BF%A1%E4%BB%A5%E5%8F%8Ahadoop%E5%A4%9A%E8%8A%82%E7%82%B9%E5%AE%89%E8%A3%85"><span class="nav-number">1.0.3.</span> <span class="nav-text">本次教程使用的是Java 8和hadoop 2.9.2，总共分为四个部分，Java安装，hadoop单节点安装，ssh免密通信以及hadoop多节点安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86%EF%BC%9AJava%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B"><span class="nav-number">1.0.4.</span> <span class="nav-text">第一部分：Java安装教程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E9%83%A8%E5%88%86%EF%BC%9AHadoop%E5%8D%95%E8%8A%82%E7%82%B9%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B"><span class="nav-number">1.0.5.</span> <span class="nav-text">第二部分：Hadoop单节点安装教程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E9%83%A8%E5%88%86%EF%BC%9A%E5%85%8D%E5%AF%86%E7%99%BB%E5%BD%95"><span class="nav-number">1.0.6.</span> <span class="nav-text">第三部分：免密登录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E9%83%A8%E5%88%86%EF%BC%9AHadoop%E5%A4%9A%E8%8A%82%E7%82%B9%E6%90%AD%E5%BB%BA"><span class="nav-number">1.0.7.</span> <span class="nav-text">第四部分：Hadoop多节点搭建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%BA%94%E9%83%A8%E5%88%86%EF%BC%9A%E8%AF%8D%E9%A2%91%E7%BB%9F%E8%AE%A1-%E4%BB%A5%E4%B8%8B%E6%93%8D%E4%BD%9C%E9%83%BD%E5%9C%A8master%E8%8A%82%E7%82%B9%E8%BF%9B%E8%A1%8C"><span class="nav-number">1.0.8.</span> <span class="nav-text">第五部分：词频统计(以下操作都在master节点进行)</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Hadoop%E6%95%99%E7%A8%8B"><span class="nav-number">1.</span> <span class="nav-text">Hadoop教程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%95%E8%8A%82%E7%82%B9%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93%EF%BC%9A"><span class="nav-number">1.0.1.</span> <span class="nav-text">单节点问题总结：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E8%8A%82%E7%82%B9%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93%EF%BC%9A"><span class="nav-number">1.0.2.</span> <span class="nav-text">多节点问题总结：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hadoop-Java%E5%AF%B9%E5%BA%94%E7%89%88%E6%9C%AC%E5%8F%B7"><span class="nav-number">1.0.3.</span> <span class="nav-text">Hadoop Java对应版本号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%AC%E6%AC%A1%E6%95%99%E7%A8%8B%E4%BD%BF%E7%94%A8%E7%9A%84%E6%98%AFJava-8%E5%92%8Chadoop-2-9-2%EF%BC%8C%E6%80%BB%E5%85%B1%E5%88%86%E4%B8%BA%E5%9B%9B%E4%B8%AA%E9%83%A8%E5%88%86%EF%BC%8CJava%E5%AE%89%E8%A3%85%EF%BC%8Chadoop%E5%8D%95%E8%8A%82%E7%82%B9%E5%AE%89%E8%A3%85%EF%BC%8Cssh%E5%85%8D%E5%AF%86%E9%80%9A%E4%BF%A1%E4%BB%A5%E5%8F%8Ahadoop%E5%A4%9A%E8%8A%82%E7%82%B9%E5%AE%89%E8%A3%85"><span class="nav-number">1.0.4.</span> <span class="nav-text">本次教程使用的是Java 8和hadoop 2.9.2，总共分为四个部分，Java安装，hadoop单节点安装，ssh免密通信以及hadoop多节点安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86%EF%BC%9AJava%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B"><span class="nav-number">1.0.5.</span> <span class="nav-text">第一部分：Java安装教程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E9%83%A8%E5%88%86%EF%BC%9AHadoop%E5%8D%95%E8%8A%82%E7%82%B9%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B"><span class="nav-number">1.0.6.</span> <span class="nav-text">第二部分：Hadoop单节点安装教程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E9%83%A8%E5%88%86%EF%BC%9A%E5%85%8D%E5%AF%86%E7%99%BB%E5%BD%95"><span class="nav-number">1.0.7.</span> <span class="nav-text">第三部分：免密登录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E9%83%A8%E5%88%86%EF%BC%9AHadoop%E5%A4%9A%E8%8A%82%E7%82%B9%E6%90%AD%E5%BB%BA"><span class="nav-number">1.0.8.</span> <span class="nav-text">第四部分：Hadoop多节点搭建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%BA%94%E9%83%A8%E5%88%86%EF%BC%9A%E8%AF%8D%E9%A2%91%E7%BB%9F%E8%AE%A1-%E4%BB%A5%E4%B8%8B%E6%93%8D%E4%BD%9C%E9%83%BD%E5%9C%A8master%E8%8A%82%E7%82%B9%E8%BF%9B%E8%A1%8C"><span class="nav-number">1.0.9.</span> <span class="nav-text">第五部分：词频统计(以下操作都在master节点进行)</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
