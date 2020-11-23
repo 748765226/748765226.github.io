@@ -81,8 +81,8 @@
 
 <p><img data-src="https://i.loli.net/2020/11/16/sJwmpYCGlt3TEfd.png"> </p>
 <p>4.键盘<code>ESC</code>输入<code>:wq</code>保存退出，并且输入<code>source ~/.bashrc</code>使其生效</p>
-<p>5.输入<code>vi etc/hadoop/hadoop-env.sh</code> 修改JAVA_HOME</p>
-<p>`  export JAVA_HOME=/root/jdk1.8.0_271/  </p>
+<p>5.输入<code>vi etc/hadoop/hadoop-env.sh</code> </p>
+<p>修改JAVA_HOME<code> export JAVA_HOME=/root/jdk1.8.0_271/</code>  </p>
 <p>#（！！！注意：JAVA_HOME的路径是你实际解压后的JDK的路径，千万别写错了）</p>
 <p><img data-src="https://i.loli.net/2020/11/16/2nyCsK4vkjqYpHI.png"> </p>
 <p><strong>更新hadoop配置文件（四个文件）</strong></p>
