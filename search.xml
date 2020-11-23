@@ -3,18 +3,24 @@
   <entry>
     <title>Hadoop</title>
     <url>/2020/11/15/Hadoop%E6%95%99%E7%A8%8B/</url>
-    <content><![CDATA[<h1 id="Hadoop教程"><a href="#Hadoop教程" class="headerlink" title="Hadoop教程"></a>Hadoop教程</h1><a id="more"></a>
+    <content><![CDATA[<h1 id="Hadoop教程"><a href="#Hadoop教程" class="headerlink" title="Hadoop教程"></a>Hadoop教程</h1><p><strong>本教程上有任何问题请大家在评论区（免登录评论）反馈，我看到会及时修改，教程不易，给予点支持！</strong></p>
+<a id="more"></a>
 
 <p>本教程只记录个人安装Hadoop时的心得以及所踩的坑，若有不对之处欢迎指出交流！</p>
 <p>本教程所需文件和工具教程都放到我的<a href="https://github.com/748765226/hadoop">repo</a>，有任何问题随时欢迎在评论区留言以及右下角即时通信。</p>
 <p><strong>注意！！！需要hadoop和jdk安装包的话，需要点进去具体资源进行下载，直接下载我的分支会出现问题。</strong></p>
-<h3 id="单节点问题总结："><a href="#单节点问题总结：" class="headerlink" title="单节点问题总结："></a>单节点问题总结：</h3><p>1.Hadoop 2.x namenode界面访问端口默认是50070</p>
-<p>   Hadoop 3.x namenode界面访问端口默认是9870</p>
+<h3 id="单节点反馈问题总结："><a href="#单节点反馈问题总结：" class="headerlink" title="单节点反馈问题总结："></a>单节点反馈问题总结：</h3><ol>
+<li>namenode界面访问端口问题</li>
+</ol>
+<ul>
+<li>Hadoop 2.x namenode界面访问端口默认是50070</li>
+<li>Hadoop 3.x namenode界面访问端口默认是9870</li>
+</ul>
 <p>2.关于JAVA的环境变量以及<code>JAVA_HOME=xxx</code>一定要配置对，这里是解压后的地址。如果是通过apt安装的，则需要自行去找一下安装目录，一般默认是<code>/usr/local/jvm/xxx</code>。</p>
 <p>3.Hadoop的环境变量也要根据自己的安装版本和安装目录来修改。</p>
 <p>4.Hadoop的四个主要配置文件代码格式要严格按照xml文件格式，并且也要根据具体的Hadoop版本和安装目录进行修改。</p>
 <p>5.如果上述情况避开了，还遇到namenode或者datanode打不开的问题，请大家移步安装目录下logs找到对应节点的日志下拉到最底下，找到错误自行百度或者评论区留言。</p>
-<h3 id="多节点问题总结："><a href="#多节点问题总结：" class="headerlink" title="多节点问题总结："></a>多节点问题总结：</h3><p>1.如果遇到</p>
+<h3 id="多节点反馈问题总结："><a href="#多节点反馈问题总结：" class="headerlink" title="多节点反馈问题总结："></a>多节点反馈问题总结：</h3><p>1.如果遇到</p>
 <p><img data-src="https://s3.ax1x.com/2020/11/22/DGZiDI.png"> </p>
 <p>则 修改要保存的路径<code>vi word_count.sh</code></p>
 <p><img data-src="https://s3.ax1x.com/2020/11/22/DGZFbt.png"> </p>
