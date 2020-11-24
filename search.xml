@@ -3,12 +3,13 @@
   <entry>
     <title>Hadoop</title>
     <url>/2020/11/15/Hadoop%E6%95%99%E7%A8%8B/</url>
-    <content><![CDATA[<h1 id="Hadoop教程"><a href="#Hadoop教程" class="headerlink" title="Hadoop教程"></a>Hadoop教程</h1><p><strong>本教程上有任何问题请大家在评论区（免登录评论）反馈，我看到会及时修改，教程不易，给予点支持！</strong></p>
+    <content><![CDATA[<h3 id="Hadoop教程"><a href="#Hadoop教程" class="headerlink" title="Hadoop教程"></a>Hadoop教程</h3><p><strong>本教程上有任何问题请大家在评论区（免登录评论）反馈，我看到会及时修改，教程不易，给予点支持！</strong></p>
 <a id="more"></a>
 
 <p>本教程只记录个人安装Hadoop时的心得以及所踩的坑，若有不对之处欢迎指出交流！</p>
 <p>本教程所需文件和工具教程都放到我的<a href="https://github.com/748765226/hadoop">repo</a>，有任何问题随时欢迎在评论区留言以及右下角即时通信。</p>
 <p><strong>注意！！！需要hadoop和jdk安装包的话，需要点进去具体资源进行下载，直接下载我的分支会出现问题。</strong></p>
+<p><strong>！！！终极大招，出现任何问题，执解决不了行第四部分第13步</strong></p>
 <h3 id="单节点反馈问题总结："><a href="#单节点反馈问题总结：" class="headerlink" title="单节点反馈问题总结："></a>单节点反馈问题总结：</h3><ol>
 <li>namenode界面访问端口问题</li>
 </ol>
