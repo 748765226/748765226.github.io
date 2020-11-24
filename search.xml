@@ -200,7 +200,11 @@
 <p>13.如果有任何报错解决不了，请分别在所有节点执行以下操作</p>
 <ul>
 <li><code>stop-all.sh</code> master节点执行</li>
-<li><code>rm -rf ~/.ssh/known_hosts</code></li>
+<li><code>rm -rf ~/.ssh/known_hosts</code> 在master节点</li>
+<li><code>ssh slave1</code> 在master节点</li>
+<li><code>ssh slave2</code> 在master节点</li>
+<li><code>ssh slave3</code> 在master节点</li>
+<li><code>ssh master</code> 在master节点</li>
 <li><code>rm -rf hadoop_tmp</code>  所有节点都要执行</li>
 <li><code>rm -rf logs</code> 所有节点都要执行</li>
 <li><code>hdfs namenode -format</code> 在master节点执行</li>
