@@ -128,8 +128,8 @@
 <h4 id="密钥对生成"><a href="#密钥对生成" class="headerlink" title="密钥对生成"></a>密钥对生成</h4><p>首先在master节点上输入<code>ssh-keygen -t rsa</code>生成SSH秘钥对</p>
 <p> <img data-src="https://s3.ax1x.com/2020/11/16/Dk3VKg.png"> </p>
 <h4 id="设置权限"><a href="#设置权限" class="headerlink" title="设置权限"></a>设置权限</h4><p>在master上给用户设置读写.ssh文件夹权限</p>
-<p>输入<code>chmod 600 ~/.ssh</code></p>
-<h4 id="复制master公钥到三个slave上"><a href="#复制master公钥到三个slave上" class="headerlink" title="复制master公钥到三个slave上"></a>复制master公钥到三个slave上</h4><p>输入<code>scp .ssh/id_rsa.pub root@47.97.9.116 /root/.ssh/authorized_keys</code></p>
+<p>输入<code>chmod 0600 ~/.ssh/*</code></p>
+<h4 id="复制master公钥到三个slave上"><a href="#复制master公钥到三个slave上" class="headerlink" title="复制master公钥到三个slave上"></a>复制master公钥到三个slave上</h4><p>输入<code>scp .ssh/id_rsa.pub root@47.97.9.116:/root/.ssh/authorized_keys</code></p>
 <p>！！！#@后面为对应slave公网ip <img data-src="https://s3.ax1x.com/2020/11/16/Dk3ebj.png"> </p>
 <h4 id="测试免密登陆"><a href="#测试免密登陆" class="headerlink" title="测试免密登陆"></a>测试免密登陆</h4><p>测试之前确保master /etc/hosts已经添加了对应节点的内网IP</p>
 <p>输入<code>ssh slave1</code> 测试</p>
