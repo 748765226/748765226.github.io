@@ -118,7 +118,7 @@
 <p> <img data-src="https://s3.ax1x.com/2020/11/22/DGVgun.png"> </p>
 <h4 id="修改-slaves"><a href="#修改-slaves" class="headerlink" title="修改 slaves"></a>修改 slaves</h4><p>输入<code>vi etc/hadoop/slaves</code>   添加 slave1 slave2 slave3</p>
 <p> <img data-src="https://s3.ax1x.com/2020/11/22/DGV44U.png"> </p>
-<h4 id="修改主机名"><a href="#修改主机名" class="headerlink" title="修改主机名"></a>修改主机名</h4><p>输入<code>hostnamectl sethostname master</code> </p>
+<h4 id="修改主机名"><a href="#修改主机名" class="headerlink" title="修改主机名"></a>修改主机名</h4><p>输入<code>hostnamectl set-hostname master</code> </p>
 <p>注：在slave节点就对应改成slave 1，slave2，slave3，之后摁下<code>ctr+d</code>退出，重新ssh登录就可以看到了</p>
 <h4 id="修改-etc-hosts"><a href="#修改-etc-hosts" class="headerlink" title="修改/etc/hosts"></a>修改/etc/hosts</h4><p>输入<code>vi /etc/hosts</code>    添加如下  </p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">xxxx  master # xxxx对应master的内网ip</span><br><span class="line">xxxx  slave1 # slave1的内网ip</span><br><span class="line">xxxx  slave2 # slave2的内网ip</span><br><span class="line">xxxx  slave3 # slave3的内网ip</span><br><span class="line">#！！！如果这时候slave1 slave2 slave3没有创建，则先跳过，最后多节点搭完修改</span><br><span class="line">#！！！这里有个大坑，这里的ip一定要用内网，别问为什么，并且要将原来的内网ip注释掉</span><br></pre></td></tr></table></figure>
